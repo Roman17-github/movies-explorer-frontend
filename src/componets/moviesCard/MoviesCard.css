@@ -1,0 +1,52 @@
+.moviesCard__foto {
+  width: 100%;
+  min-height: 203px;
+}
+
+.moviesCard__mark {
+  background-size: cover;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 36px;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  background-color: inherit;
+}
+
+.moviesCard__mark_active {
+  background-image: url("../../images/mark.svg");
+}
+
+.moviesCard__mark_disabled {
+  background-image: url("../../images/mark2.svg");
+}
+
+.moviesCard__mark_delete {
+  background-image: url("../../images/d9.svg");
+}
+
+.moviesCard__name {
+  color: white;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  margin:0 0 9px;
+}
+
+.moviesCard_duration {
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+  color: #8B8B8B;
+  text-align: start;
+}
+
+.moviesCard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 14px 0;
+  background-color: #222222;
+}
