@@ -1,6 +1,8 @@
 .profile {
   background-color: #202020;
   height: 100vh;
+  padding-top: 74px;
+  width: 100%;
 }
 
 .profile__title {
@@ -49,6 +51,7 @@
   font-weight: normal;
   font-size: 13px;
   line-height: 16px;
+  padding: 0;
 }
 
 .profile__button-exit {
@@ -60,9 +63,28 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
+  padding: 0;
+}
+
+@media screen and (max-width:1023px) {
+  .profile{
+    padding-top: 236px;
+  }
 }
 
 @media screen and (max-width:767px) {
+   .profile {
+     padding-top: 70px;
+   }
+
+   .profile__input-container {
+     width: 260px;
+   }
+
+   .profile__button-container {
+     width: 300px;
+   }
+
   .profile__button-edit {
     font-size: 12px;
     line-height: 15px;

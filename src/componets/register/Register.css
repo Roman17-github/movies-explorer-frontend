@@ -20,6 +20,7 @@
 .register__input-container {
   border-bottom: 1px solid #424242;
   margin-bottom: 24px;
+  width: 100%;
 }
 
 .register__input-title {
@@ -43,12 +44,12 @@
   height: 38px;
 }
 
-.register__input-container:last-of-type {
+.register__input-container:nth-of-type(3) {
    margin: 0;
 }
 
 .register__button {
-  margin-top: 144px;
+  margin-top: 152px;
   background-color: #4285F4;
   color: white;
   border-radius: 3px;
@@ -78,4 +79,23 @@
 .register__login-link {
   color: #4285F4;
   text-decoration: none;
+}
+
+@media screen and (max-width:767px) {
+  .register__title {
+    text-align: center;
+  }
+  .register-container {
+    align-items: center;
+    width: 260px;
+  }
+  .register__button {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 240px;
+  }
+  .register__login-container {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

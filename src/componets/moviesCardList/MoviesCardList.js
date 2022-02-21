@@ -20,7 +20,6 @@ function MoviesCardList({ cards, saved }) {
         <MoviesCard title="33 слова о дизайне" link={foto} duration="1ч 47м" saved={saved} />
         <MoviesCard title="33 слова о дизайне" link={foto} duration="1ч 47м" saved={saved} />
       </div>
-      <button className="moviesCardList__add">Ещё</button>
     </div>
   )
 }

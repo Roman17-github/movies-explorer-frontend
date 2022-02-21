@@ -81,6 +81,7 @@
 @media screen and (max-width:767px) {
   .techs {
     padding: 70px 18px;
+    background-color: #202020;
   }
 
   .techs__title {
@@ -102,9 +103,14 @@
   }
 
   .techs__list {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(84px, 84px));
+    margin-top: 50px;
     width: 178px;
+    gap: 10px;
   }
+
+  
 
   .techs__subtitle {
     margin: 60px 0 24px;

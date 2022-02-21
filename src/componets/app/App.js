@@ -50,14 +50,16 @@ function App() {
   return (
     <div className="App">
       {pathHeader.includes(location) && (<Header loggedIn={isLoggin} modal={modalOpen} />)}
-      <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/movies' element={<Movies cards={cards} />} />
-        <Route path='/saved-movies' element={<SavedMovies cards={cards} />} />
-        <Route path="/profile" element={<Profile name={currentUser.name} signOut={signOut} />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/signin" element={<Login />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='/movies' element={<Movies cards={cards} />} />
+          <Route path='/saved-movies' element={<SavedMovies cards={cards} />} />
+          <Route path="/profile" element={<Profile name={currentUser.name} signOut={signOut} />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/signin" element={<Login />} />
+        </Routes>
+      </main>
       {pathFooter.includes(location) && (<Footer />)}
       <Modal isModal={isModal} close={modalClose} />
     </div>

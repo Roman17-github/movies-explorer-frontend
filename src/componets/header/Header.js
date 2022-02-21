@@ -1,12 +1,19 @@
 import logo from '../../images/logo.svg';
 import './Header.css';
 import Navigation from '../navigation/Navigation';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Header({ loggedIn, modal }) {
 
+  const path = useLocation().pathname;
+  const navigate = useNavigate();
+  const logoGo = () => {
+    navigate("/");
+  };
+  
   return (
-    <header className={loggedIn ? "header header_login" : "header "} >
-      <img src={logo} alt="логотип" className="header__logo" />
+    <header className={path === "/" ? "header" : "header header_login"} >
+      <img src={logo} alt="логотип" className="header__logo" onClick={logoGo} />
       <div className='header__profile'>
         {!loggedIn && (
           <>

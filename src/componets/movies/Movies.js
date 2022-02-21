@@ -9,6 +9,7 @@ function Movies({ cards }) {
     <section className="movies">
       <SearchForm />
       <MoviesCardList cards={cards} />
+      <button className="movies__add">Ещё</button>
     </section>
   )
 }

@@ -16,20 +16,28 @@
   box-sizing: border-box;
   border-radius: 50px;
   padding-left: 22px;
+  color: white;
 }
 
 .searchForm__button {
-  background: url("../../images/find.svg") no-repeat 50% 50%;
+  background-color: #4285F4;
+  background-image: url("../../images/button-icon.svg");
   width: 34px;
   height: 34px;
-  border: 0;
-  background-size: cover;
   border-radius: 48px;
+  background-size:auto;
+  background-repeat: no-repeat;
+  background-position: center;
   padding: 0;
   cursor: pointer;
   position: absolute;
   top: 7px;
   right: 7px;
+  border: 0;
+}
+
+.searchForm__button_disabled {
+  background-color: #dbd7d7;
 }
 
 .searchForm__container {
