@@ -53,7 +53,7 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='/movies' element={<Movies cards={cards} />} />
+          <Route path="/movies" element={<Movies cards={cards} />} />
           <Route path='/saved-movies' element={<SavedMovies cards={cards} />} />
           <Route path="/profile" element={<Profile name={currentUser.name} signOut={signOut} />} />
           <Route path="/signup" element={<Register />} />

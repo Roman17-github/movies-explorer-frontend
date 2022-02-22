@@ -17,6 +17,7 @@
   border-radius: 50px;
   padding-left: 22px;
   color: white;
+  outline: none;
 }
 
 .searchForm__button {
@@ -35,9 +36,15 @@
   right: 7px;
   border: 0;
 }
+.searchForm__error {
+  color: red;
+  font-size: 14px;
+  text-align: left;
+  display: block;
+}
 
-.searchForm__button_disabled {
-  background-color: #dbd7d7;
+.searchForm__button:active {
+  opacity: 0.5;
 }
 
 .searchForm__container {
