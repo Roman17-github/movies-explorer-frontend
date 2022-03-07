@@ -1,0 +1,83 @@
+.modal {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  
+  box-sizing: border-box;
+}
+
+.modal_opened {
+  display: block;
+}
+
+.modal__main {
+  max-width: 520px;
+  background-color: #202020;
+  z-index: 10;
+  height: 100vh;
+  margin-left: auto;
+  position: relative;
+  padding: 159px 0 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.modal__close {
+  width: 22px;
+  height: 22px;
+  right: 22px;
+  top:22px;
+  position: absolute;
+  background-color: inherit;
+  background-image: url("../../images/Group.svg");
+  background-size: contain;
+  border: 0;
+  cursor: pointer;
+}
+
+.modal__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal__link {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: white;
+  margin-bottom: 28px;
+}
+
+.modal__link_active {
+  border-bottom: 2px solid white;
+  padding-bottom: 4px;
+}
+
+.modal__link_account {
+  background-color: #313131;
+  border-radius: 20px;
+  width: 100px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width:767px) {
+  .modal__main {
+    max-width: 100vw;
+    padding: 144px 0 46px;
+  }
+  .modal__close {
+    right: 20px;
+    top:20px
+  }
+}

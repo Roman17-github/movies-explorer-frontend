@@ -1,0 +1,27 @@
+.notfound {
+  background-color: #202020;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.notfound__code {
+  margin: 0;
+  font-weight: normal;
+  font-size: 140px;
+  line-height: 169px;
+  color: white;
+}
+
+.notfound__title {
+  color: white;
+}
+
+.notfound__link {
+  margin-top: 184px;
+  color: #4285F4;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}

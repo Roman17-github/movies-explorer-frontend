@@ -1,0 +1,149 @@
+.aboutMe {
+  background-color: #202020;
+  padding: 110px 70px;
+}
+
+.aboutMe__title {
+  height: 51px;
+  color: white;
+  text-align: start;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 27px;
+  border-bottom: 1px solid white;
+  margin: 0
+}
+
+.aboutMe__container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 66px;
+}
+
+.aboutMe__info {
+  text-align: start;
+  color: white;
+  width: 600px;
+}
+
+.aboutMe__name {
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  margin: 0;
+}
+
+.aboutMe__description {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+}
+
+.aboutMe__profession {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 18px 0 26px;
+}
+
+.aboutMe__link-container {
+  display: flex;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  margin-top: 99px;
+}
+
+.aboutMe__link {
+  color: white;
+  text-decoration: none;
+}
+
+.aboutMe__link:first-child {
+  margin-right: 20px;
+}
+
+.aboutMe__foto {
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width:1023px) {
+  .aboutMe {
+    padding: 90px 50px;
+  }
+
+  .aboutMe__foto {
+    width: 255px;
+    height: 307px;
+  }
+
+  .aboutMe__info {
+    width: 364px;
+  }
+
+  .aboutMe__name {
+    font-size: 50px;
+    line-height: 58px;
+  }
+
+  .aboutMe__profession {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 16px 0 20px;
+  }
+
+  .aboutMe__description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .aboutMe__link-container {
+    margin-top: 87px;
+  }
+}
+
+@media screen and (max-width:767px) {
+  .aboutMe {
+    padding: 70px 14px 70px;
+  }
+
+  .aboutMe__foto {
+    width: 292px;
+    height: 352px;
+  }
+  .aboutMe__name {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .aboutMe__info {
+    width: 100%;
+  }
+
+  .aboutMe__container {
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 292px;
+    margin: 0 auto;
+  }
+
+  .aboutMe__profession {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 20px 0 20px;
+  }
+
+  .aboutMe__description {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .aboutMe__link:first-child {
+    margin-right: 26px;
+  }
+}

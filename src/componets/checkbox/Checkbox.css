@@ -1,0 +1,50 @@
+.checkbox {
+  width: 36px;
+  height: 20px;
+  margin-left: 14px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 20px;
+}
+
+.checkbox_active {
+  background-color: #3DDC84;
+  transition: 0.5s;
+}
+
+.checkbox_active::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  left: 61.11%;
+  right: 16.67%;
+  top: 30%;
+  bottom: 30%;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+.checkbox__input {
+  display: none;
+}
+
+.checkbox_disabled {
+  background-color: #dbd7d7;
+  transition: 0.5s;
+}
+
+.checkbox_disabled::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  left: 16.67%;
+  right: 61.11%;
+  top: 30%;
+  bottom: 30%;
+  border-radius: 50%;
+  transition: 0.5s;
+}

@@ -1,0 +1,146 @@
+.AboutProject {
+  padding: 110px 70px;
+  max-width: 100%;
+  background-color: #202020;
+}
+
+.AboutProject__title {
+  height: 51px;
+  color: white;
+  text-align: start;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 27px;
+  border-bottom: 1px solid white;
+  margin: 0;
+}
+
+.AboutProject__container {
+  color: white;
+  height: 90px;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+
+.AboutProject__container:last-child {
+  margin-left: 40px;
+}
+
+.AboutProject__info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 70px;
+}
+
+.AboutProject__heading {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+  margin:0 0 26px 0;
+}
+
+.AboutProject__description {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+}
+
+.AboutProject__panel {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  margin-top: 110px;
+}
+
+.AboutProject__scale {
+  height: 36px;
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.AboutProject__scale_backend {
+  background-color: #3DDC84;
+}
+
+.AboutProject__scale_frontend {
+  background-color: #303030;
+  color: white;
+}
+.AboutProject__scale_tech {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #8B8B8B;
+}
+
+@media screen and (max-width:1023px) {
+  .AboutProject {
+    padding: 90px 50px;
+  }
+}
+
+@media screen and (max-width:767px) {
+
+  .AboutProject {
+    padding: 70px 18px;
+  }
+  .AboutProject__info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .AboutProject__heading {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .AboutProject__description {
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .AboutProject__container {
+    max-width: 284px;
+    margin-bottom: 56px;
+    min-height: 108px;
+  }
+
+  .AboutProject__heading {
+    margin-bottom: 16px;
+  }
+
+  .AboutProject__container:last-child {
+    margin-left: 0;
+  }
+
+  .AboutProject__panel {
+    margin-top: 60px;
+  }
+
+  .AboutProject__scale {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .AboutProject__scale_tech {
+    font-size: 11px;
+    line-height: 13px
+  }
+}
