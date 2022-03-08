@@ -1,5 +1,7 @@
 .movies {
   background-color: #202020;
+  min-height: 100vh;
+  
 }
 
 .movies__add {
@@ -15,4 +17,13 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 15px
+}
+
+.movies__place {
+  color: white;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 15px;
+  max-width: 500px;
+  margin: 20px auto;
 }

@@ -1,6 +1,6 @@
 .moviesCard__foto {
   width: 100%;
-  min-height: 203px;
+  height: 203px;
 }
 
 .moviesCard__mark {
@@ -13,14 +13,11 @@
   cursor: pointer;
   padding: 0;
   background-color: inherit;
+  background-image: url("../../images/mark2.svg");
 }
 
 .moviesCard__mark_active {
   background-image: url("../../images/mark.svg");
-}
-
-.moviesCard__mark_disabled {
-  background-image: url("../../images/mark2.svg");
 }
 
 .moviesCard__mark_delete {

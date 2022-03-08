@@ -24,7 +24,7 @@ function Header({ loggedIn, modal }) {
         {loggedIn && (
           <>
             <Navigation link="/movies" text="Фильмы" styles="header__films" />
-            <Navigation link="/saved-movie" text="Сохраненные фильмы" styles="header__savefilms" />
+            <Navigation link="/saved-movies" text="Сохраненные фильмы" styles="header__savefilms" />
             <Navigation link="/profile" text="Аккаунт" styles="header__account" />
           </>
         )}

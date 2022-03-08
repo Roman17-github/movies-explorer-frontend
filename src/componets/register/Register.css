@@ -59,6 +59,11 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
+  cursor: pointer;
+}
+
+.register__button_disabled {
+  background-color: #b4b4b4;
 }
 
 .register__login-container {
