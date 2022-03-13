@@ -8,7 +8,7 @@ class Api {
     if (res.ok) {
       return res.json();
     } else {
-      return Promise.reject(`Ошибка ${res.status}`);
+      return Promise.reject(res);
     }
   };
 
@@ -19,6 +19,15 @@ class Api {
       headers: this._headers,
     }).then(this._checkResponse);
   };
+
+  updateUser(name, email) {
+    return fetch(`${this._url}/users/me`, {
+      method: "PATCH",
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify({ name, email }),
+    }).then(this._checkResponse);
+  }
 
   register(name, email, password) {
     return fetch(`${this._url}/signup`, {
@@ -35,7 +44,7 @@ class Api {
       credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
-        country: card.country,
+        country: card.country || "not",
         director: card.director,
         duration: card.duration,
         year: card.year,
@@ -61,8 +70,8 @@ class Api {
 
 
   remove() {
-    return fetch(`${this._url}/remove`, {
-      method: "POST",
+    return fetch(`${this._url}/signout`, {
+      method: "GET",
       credentials: "include",
       headers: this._headers,
     }).catch((err) => {
@@ -93,7 +102,7 @@ class Api {
 
 
 const apiMain = new Api({
-  url: "http://localhost:3000",
+  url: "https://api.diplom.roma134.nomoredomains.work",
   credentials: 'include',
   headers: {
     "Content-Type": "application/json",

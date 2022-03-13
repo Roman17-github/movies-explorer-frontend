@@ -14,13 +14,14 @@ import Modal from "../modal/Modal";
 import apiMovies from "../../utils/MoviesApi";
 import apiMain from "../../utils/MainApi";
 import { currentUserContext } from "../../context/CurrentUserContext";
+import ProtectedRoute from "../ProtectoRoute/ProtectoRoute";
 
 
 function App() {
+  const auth = localStorage.getItem("login");
   const [ cards, setCards ] = React.useState([]);
   const [ savecards, setsaveCards ] = React.useState([]);
   const [ currentUser, setCurrentUser ] = React.useState({});
-  const [ isLoggin, setLoggin ] = React.useState(false);
   const [ isModal, setModal ] = React.useState(false);
   const [ isLoading, setLoading ] = React.useState(false);
   const [ isPlace, setPlace ] = React.useState("");
@@ -42,7 +43,8 @@ function App() {
   ]
 
   function signOut() {
-    setLoggin(false);
+    ;
+    localStorage.removeItem("login")
     apiMain.remove();
     navigate("/");
   };
@@ -55,13 +57,13 @@ function App() {
     setModal(false);
   };
 
-  function submitForm(input, checkbox) {
+  function submitFormMovies(input, checkbox) {
     setLoading(true);
     apiMovies()
       .then((data) => {
         return data.filter((card) => {
           if (checkbox) {
-            return card.nameRU.toLowerCase().includes(input.toLowerCase()) && card.duration <= 60;
+            return card.nameRU.toLowerCase().includes(input.toLowerCase()) && card.duration <= 40;
           } else {
             return card.nameRU.toLowerCase().includes(input.toLowerCase());
           }
@@ -71,7 +73,6 @@ function App() {
         if (data.length === 0) {
           setPlace("Ничего не найдено");
         }
-        console.log(data);
         localStorage.setItem("cards", JSON.stringify(data));
         setCards(data);
       })
@@ -83,11 +84,33 @@ function App() {
       })
   };
 
+
+  function submitFormSaved(input, checkbox) {
+    async function findSaved() {
+      return savecards.filter((card) => {
+        if (checkbox) {
+          return card.nameRU.toLowerCase().includes(input.toLowerCase()) && card.duration <= 40;
+        } else {
+          return card.nameRU.toLowerCase().includes(input.toLowerCase());
+        }
+      })
+    };
+    setLoading(true);
+    findSaved()
+      .then((res) => {
+        setsaveCards(res);
+      })
+      .finally(() => {
+        setLoading(false);
+      })
+  };
+
   function register(input) {
     apiMain.register(input.name, input.email, input.password)
-      .then(() => {
+      .then((res) => {
+        localStorage.setItem("login", true);
         navigate("/movies");
-        setLoggin(true);
+        setCurrentUser(res);
       })
       .catch((err) => {
         console.log(err);
@@ -97,24 +120,32 @@ function App() {
   function login(input) {
     apiMain.login(input.email, input.password)
       .then(() => {
-        navigate("/movies");
         localStorage.setItem("login", true);
-        setLoggin(true);
-
+        navigate("/movies");
       })
       .catch((err) => {
         console.log(err);
       })
   };
 
-  const deleteCard = (card) => {
+  function deleteCard(card) {
     apiMain.delete(card._id)
-    .then(() => {
-      setsaveCards((state) => state.filter((c) => c._id !== card._id));
-    })
-    
+      .then(() => {
+        setsaveCards((state) => state.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+  };
+
+  function saveCard(card) {
+    apiMain.savedMovies(card)
+      .then((m) => {
+        setsaveCards((state) => state.concat(m))
+      })
   }
-  
+
 
   React.useEffect(() => {
     if (localStorage.getItem("cards")) {
@@ -122,15 +153,16 @@ function App() {
     };
     apiMain.getUserInfo()
       .then((res) => {
-        if (res) {
-          setCurrentUser(res);
-          setLoggin(true);
-        }
+        setCurrentUser(res);
       })
       .catch((err) => {
-        console.log(err)
+        if (err.status === 401) {
+          localStorage.removeItem("login");
+          navigate("/signin");
+        }
       })
   }, []);
+
 
 
   React.useEffect(() => {
@@ -138,18 +170,22 @@ function App() {
       .then((res) => {
         setsaveCards(res);
       })
-  }, [navigate]);
+  }, [ navigate ]);
+
+
+
+
 
   return (
     <div className="App">
       <currentUserContext.Provider value={currentUser}>
-        {pathHeader.includes(location) && (<Header loggedIn={isLoggin} modal={modalOpen} />)}
+        {pathHeader.includes(location) && (<Header loggedIn={auth} modal={modalOpen} />)}
         <main>
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/movies" element={<Movies  cards={cards} isLoading={isLoading} place={isPlace} submit={submitForm} />} />
-            <Route path="/saved-movies" element={<SavedMovies deleteCard={deleteCard} cards={savecards} />} />
-            <Route path="/profile" element={<Profile name={currentUser.name} signOut={signOut} />} />
+            <Route path="/movies" element={<ProtectedRoute loggedIn={auth} component={<Movies onSave={saveCard} deleteCard={deleteCard} savecards={savecards} cards={cards} isLoading={isLoading} place={isPlace} submit={submitFormMovies} />} />} />
+            <Route path="/saved-movies" element={<ProtectedRoute loggedIn={auth} component={<SavedMovies deleteCard={deleteCard} cards={savecards} place={isPlace} isLoading={isLoading} onSubmit={submitFormSaved} />} />} />
+            <Route path="/profile" element={<ProtectedRoute loggedIn={auth} component={<Profile name={currentUser.name} signOut={signOut} />} />} />
             <Route path="/signup" element={<Register submit={register} />} />
             <Route path="/signin" element={<Login submit={login} />} />
             <Route path="*" element={<NotFound />} />

@@ -1,17 +1,31 @@
 import React from "react";
 import "./MoviesCard.css";
-import mainApi from "../../utils/MainApi";
+import { useLocation } from 'react-router-dom';
 
 function MoviesCard(card) {
   const [ isMark, setMark ] = React.useState(false);
+  const path = useLocation().pathname;
+
+  function g() {
+    return card.savecards.some((item) => item.movieId === card.id);
+  };
+
+  function a() {
+    return card.savecards.find((item) => item.movieId === card.id);
+  };
 
   const clickMark = () => {
-    setMark(isMark ? false : true);
-    mainApi.savedMovies(card);
+    if (g()) {
+      card.deleteCard(a());
+      setMark(false)
+    } else {
+      card.onSave(card);
+      setMark(true)
+    }
   };
 
   const onDelete = () => {
-   card.deleteCard(card);
+    card.deleteCard(card);
   };
 
   function getTimeFromMins(mins) {
@@ -20,6 +34,8 @@ function MoviesCard(card) {
     return hours + 'ч. ' + minutes + 'м.';
   };
 
+  
+
   return (
     <div className="moviesCard">
       <div className="moviesCard__header">
@@ -27,10 +43,10 @@ function MoviesCard(card) {
           <p className="moviesCard__name">{card.title}</p>
           <p className="moviesCard_duration">{getTimeFromMins(card.duration)}</p>
         </div>
-        {card.saved ? <button className="moviesCard__mark moviesCard__mark_delete" onClick={onDelete} /> :
-          <button className={`moviesCard__mark ${isMark ? "moviesCard__mark_active" : ""}`} onClick={clickMark} />}
+        {path === "/saved-movies" ? <button className="moviesCard__mark moviesCard__mark_delete" onClick={onDelete} /> :
+          <button className={`moviesCard__mark ${g() ? "moviesCard__mark_active" : ""}`} onClick={clickMark} />}
       </div>
-      <img className="moviesCard__foto" alt="картинка" src={card.src} />
+      <img className="moviesCard__foto" alt="картинка" src={card.src} onClick={() => window.open(card.link)} />
     </div>
   )
 };

@@ -1,35 +1,62 @@
 import React from "react";
 import "./Profile.css";
 import { currentUserContext } from "../../context/CurrentUserContext";
+import { useForm } from "react-hook-form";
+import apiMain from "../../utils/MainApi";
 
 function Profile({ signOut }) {
-
-  const [ name, setName ] = React.useState("");
-  const [ email, setEmail ] = React.useState("");
   const currentUser = React.useContext(currentUserContext);
+  const [ name, setName ] = React.useState("")
+  const { register, formState: { errors }, handleSubmit, setValue } = useForm({
+    mode: "onChange"
+  });
+
+  const edit = (input) => {
+    apiMain.updateUser(input.name, input.email)
+      .then(() => {
+        setName(input.name)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
   React.useEffect(() => {
     setName(currentUser.name);
-    setEmail(currentUser.email);
+    setValue("name", currentUser.name);
+    setValue("email", currentUser.email);
   }, [ currentUser ]);
 
+
   return (
-    <section className="profile">
+    <form className="profile" onSubmit={handleSubmit(edit)}>
       <h2 className="profile__title">Привет,{name}!</h2>
       <div className="profile__input-container">
         <p>Имя</p>
-        <input placeholder="Имя" className="profile__input" value={name || ""} onChange={(e) => {setName( e.target.value)}} />
+        <input placeholder="Имя" className="profile__input"
+          {...register("name", { required: "обязательное поле" })}
+        />
       </div>
+      <span className="profile__error">{errors.name?.message}</span>
       <div className="profile__input-container">
         <p>Email</p>
-        <input placeholder="Email" className="profile__input" value={email || ""} onChange={(e) => {setEmail( e.target.value)}} />
+        <input placeholder="Email" className="profile__input"
+          {...register("email", {
+            required: "обязательное поле",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
+              message: "Введите email"
+            }
+          })}
+        />
       </div>
+      <span className="profile__error">{errors.email?.message}</span>
       <div className="profile__button-container">
-        <button className="profile__button-edit">Редактировать</button>
+        <button className="profile__button-edit" type="submit" >Редактировать</button>
         <button className="profile__button-exit" onClick={signOut}>Выйти из аккаунта</button>
       </div>
 
-    </section>
+    </form>
   )
 };
 

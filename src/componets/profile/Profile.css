@@ -31,6 +31,10 @@
   outline: none;
   color: white;
 }
+.profile__error {
+  margin: 0 auto;
+  color: red;
+}
 
 .profile__input-container:last-of-type {
   border: 0;
