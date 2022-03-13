@@ -3,7 +3,6 @@ import "./MoviesCard.css";
 import { useLocation } from 'react-router-dom';
 
 function MoviesCard(card) {
-  const [ isMark, setMark ] = React.useState(false);
   const path = useLocation().pathname;
 
   function g() {
@@ -17,10 +16,8 @@ function MoviesCard(card) {
   const clickMark = () => {
     if (g()) {
       card.deleteCard(a());
-      setMark(false)
     } else {
       card.onSave(card);
-      setMark(true)
     }
   };
 

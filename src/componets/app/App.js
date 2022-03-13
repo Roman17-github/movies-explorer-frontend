@@ -43,10 +43,10 @@ function App() {
   ]
 
   function signOut() {
-    ;
-    localStorage.removeItem("login")
+    localStorage.removeItem("login");
     apiMain.remove();
     navigate("/");
+    setCards([]);
   };
 
   function modalOpen() {
