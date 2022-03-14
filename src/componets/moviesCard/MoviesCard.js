@@ -4,19 +4,22 @@ import { useLocation } from 'react-router-dom';
 
 function MoviesCard(card) {
   const path = useLocation().pathname;
+  const [ isMark, setMark ] = React.useState(false);
 
-  function g() {
+  function savecard() {
     return card.savecards.some((item) => item.movieId === card.id);
   };
 
-  function a() {
+  function deleteCard() {
     return card.savecards.find((item) => item.movieId === card.id);
   };
 
   const clickMark = () => {
-    if (g()) {
-      card.deleteCard(a());
+    if (isMark) {
+      setMark(false)
+      card.deleteCard(deleteCard());
     } else {
+      setMark(true)
       card.onSave(card);
     }
   };
@@ -30,8 +33,13 @@ function MoviesCard(card) {
     let minutes = mins % 60;
     return hours + 'ч. ' + minutes + 'м.';
   };
+   
+  React.useLayoutEffect(() => {
+    if (savecard()) {
+      setMark(true)
+    }
+  }, [ card ])
 
-  
 
   return (
     <div className="moviesCard">
@@ -41,7 +49,7 @@ function MoviesCard(card) {
           <p className="moviesCard_duration">{getTimeFromMins(card.duration)}</p>
         </div>
         {path === "/saved-movies" ? <button className="moviesCard__mark moviesCard__mark_delete" onClick={onDelete} /> :
-          <button className={`moviesCard__mark ${g() ? "moviesCard__mark_active" : ""}`} onClick={clickMark} />}
+          <button className={`moviesCard__mark ${isMark ? "moviesCard__mark_active" : ""}`} onClick={clickMark} />}
       </div>
       <img className="moviesCard__foto" alt="картинка" src={card.src} onClick={() => window.open(card.link)} />
     </div>
