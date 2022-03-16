@@ -8,7 +8,9 @@ class Api {
     if (res.ok) {
       return res.json();
     } else {
+      console.log(res)
       return Promise.reject(res);
+      
     }
   };
 
@@ -97,9 +99,6 @@ class Api {
     }).then(this._checkResponse);
   }
 };
-
-
-
 
 const apiMain = new Api({
   url: "https://api.diplom.roma134.nomoredomains.work",

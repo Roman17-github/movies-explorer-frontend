@@ -6,25 +6,33 @@ import apiMain from "../../utils/MainApi";
 
 function Profile({ signOut }) {
   const currentUser = React.useContext(currentUserContext);
-  const [ name, setName ] = React.useState("")
-  const { register, formState: { errors }, handleSubmit, setValue } = useForm({
+  const [ name, setName ] = React.useState(currentUser.name);
+  const [ email, setEmail ] = React.useState(currentUser.email);
+  
+
+  const { register, formState: { errors }, handleSubmit, setValue, watch } = useForm({
     mode: "onChange"
   });
+
+  const changed = watch("name") === (name  || currentUser.name) && watch("email") === (email ||  currentUser.email);
+
 
   const edit = (input) => {
     apiMain.updateUser(input.name, input.email)
       .then(() => {
-        setName(input.name)
+        setName(input.name);
+        setEmail(input.email);
       })
       .catch((err) => {
         console.log(err)
       })
-  }
+  };
 
   React.useEffect(() => {
     setName(currentUser.name);
     setValue("name", currentUser.name);
     setValue("email", currentUser.email);
+
   }, [ currentUser ]);
 
 
@@ -44,7 +52,7 @@ function Profile({ signOut }) {
           {...register("email", {
             required: "обязательное поле",
             pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
+              value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
               message: "Введите email"
             }
           })}
@@ -52,7 +60,7 @@ function Profile({ signOut }) {
       </div>
       <span className="profile__error">{errors.email?.message}</span>
       <div className="profile__button-container">
-        <button className="profile__button-edit" type="submit" >Редактировать</button>
+        <button className="profile__button-edit" disabled={changed} type="submit">Редактировать</button>
         <button className="profile__button-exit" onClick={signOut}>Выйти из аккаунта</button>
       </div>
 

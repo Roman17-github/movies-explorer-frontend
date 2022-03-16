@@ -16,7 +16,7 @@ function MoviesCard(card) {
 
   const clickMark = () => {
     if (isMark) {
-      setMark(false)
+      setMark(false);
       card.deleteCard(deleteCard());
     } else {
       setMark(true)
@@ -49,7 +49,7 @@ function MoviesCard(card) {
           <p className="moviesCard_duration">{getTimeFromMins(card.duration)}</p>
         </div>
         {path === "/saved-movies" ? <button className="moviesCard__mark moviesCard__mark_delete" onClick={onDelete} /> :
-          <button className={`moviesCard__mark ${isMark ? "moviesCard__mark_active" : ""}`} onClick={clickMark} />}
+          <button className={!isMark ? "moviesCard__mark" : "moviesCard__mark_active"} onClick={clickMark} />}
       </div>
       <img className="moviesCard__foto" alt="картинка" src={card.src} onClick={() => window.open(card.link)} />
     </div>

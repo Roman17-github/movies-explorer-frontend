@@ -18,6 +18,15 @@
 }
 
 .moviesCard__mark_active {
+  background-size: cover;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 36px;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  background-color: inherit;
   background-image: url("../../images/mark.svg");
   transition: 0.5s;
 }
@@ -32,6 +41,7 @@
   font-size: 15px;
   line-height: 18px;
   margin:0 0 9px;
+  max-width: 280px;
 }
 
 .moviesCard_duration {

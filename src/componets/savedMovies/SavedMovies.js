@@ -27,8 +27,6 @@ function SavedMovies({ cards, deleteCard, place, isLoading, onSubmit }) {
     }
   };
 
-
-
   return (
     <section className="savedMovies">
       <SearchForm submit={onSubmit} />

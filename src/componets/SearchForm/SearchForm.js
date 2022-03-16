@@ -4,13 +4,17 @@ import Checkbox from "../checkbox/Checkbox";
 import { useForm } from "react-hook-form";
 
 function SearchForm({ submit }) {
-
-  const [ isCheckbox, setCheckbox ] = React.useState(false);
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const { checkbox, input } = JSON.parse(localStorage.getItem("ad")) || false;
+  const [ isCheckbox, setCheckbox ] = React.useState(checkbox);
+  const { register, formState: { errors }, handleSubmit, setValue } = useForm();
 
   const submitForm = (input) => {
-    submit(input.film, isCheckbox);
+    submit(input.film, isCheckbox);  
   };
+
+  React.useEffect(() => {
+    setValue("film",input);
+  },[]);
 
   return (
     <form className="searchForm" onSubmit={handleSubmit(submitForm)} noValidate>

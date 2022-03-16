@@ -46,7 +46,9 @@ function App() {
     localStorage.removeItem("login");
     apiMain.remove();
     navigate("/");
-    setCards([]);
+    localStorage.removeItem("cards");
+    localStorage.removeItem("ad");
+    setCards([])
   };
 
   function modalOpen() {
@@ -58,6 +60,7 @@ function App() {
   };
 
   function submitFormMovies(input, checkbox) {
+    localStorage.setItem("ad", JSON.stringify({ input, checkbox }));
     setLoading(true);
     apiMovies()
       .then((data) => {
@@ -84,10 +87,10 @@ function App() {
       })
   };
 
-
   function submitFormSaved(input, checkbox) {
+
     async function findSaved() {
-      return savecards.filter((card) => {
+      return JSON.parse(localStorage.getItem("saveCards")).filter((card) => {
         if (checkbox) {
           return card.nameRU.toLowerCase().includes(input.toLowerCase()) && card.duration <= 40;
         } else {
@@ -106,6 +109,7 @@ function App() {
   };
 
   function register(input) {
+    setLoading(true);
     apiMain.register(input.name, input.email, input.password)
       .then((res) => {
         localStorage.setItem("login", true);
@@ -115,9 +119,13 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
+      .finally(() => {
+        setLoading(false);
+      })
   };
 
   function login(input) {
+    setLoading(true);
     apiMain.login(input.email, input.password)
       .then(() => {
         localStorage.setItem("login", true);
@@ -125,6 +133,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       })
   };
 
@@ -168,6 +179,7 @@ function App() {
   React.useEffect(() => {
     apiMain.getMovies()
       .then((res) => {
+        localStorage.setItem("saveCards", JSON.stringify(res));
         setsaveCards(res);
       })
   }, [ navigate ]);
@@ -184,8 +196,8 @@ function App() {
             <Route path="/movies" element={<ProtectedRoute loggedIn={auth} component={<Movies onSave={saveCard} deleteCard={deleteCard} savecards={savecards} cards={cards} isLoading={isLoading} place={isPlace} submit={submitFormMovies} />} />} />
             <Route path="/saved-movies" element={<ProtectedRoute loggedIn={auth} component={<SavedMovies deleteCard={deleteCard} cards={savecards} place={isPlace} isLoading={isLoading} onSubmit={submitFormSaved} />} />} />
             <Route path="/profile" element={<ProtectedRoute loggedIn={auth} component={<Profile name={currentUser.name} signOut={signOut} />} />} />
-            <Route path="/signup" element={<Register submit={register} />} />
-            <Route path="/signin" element={<Login submit={login} />} />
+            <Route path="/signup" element={<Register submit={register} loading={isLoading} />} />
+            <Route path="/signin" element={<Login submit={login} loading={isLoading} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
