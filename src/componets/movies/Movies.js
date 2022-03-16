@@ -4,7 +4,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../moviesCardList/MoviesCardList";
 import Preloader from "../preLoader/preLoader";
 
-function Movies({ cards, savecards, isLoading, place, submit, deleteCard,onSave }) {
+function Movies({ cards, savecards, isLoading, place, submit, deleteCard, onSave }) {
   const [ mountCount, setMountcount ] = React.useState(12);
 
   window.addEventListener("resize", () => {

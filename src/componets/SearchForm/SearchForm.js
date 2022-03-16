@@ -2,9 +2,11 @@ import React from "react";
 import "./SearchForm.css";
 import Checkbox from "../checkbox/Checkbox";
 import { useForm } from "react-hook-form";
+import { useLocation } from 'react-router-dom';
 
 function SearchForm({ submit }) {
-  const { checkbox, input } = JSON.parse(localStorage.getItem("ad")) || false;
+  const pathSaved = useLocation().pathname === "/saved-movies";
+  const { checkbox, input } = pathSaved ? false : JSON.parse(localStorage.getItem("ad")) || false;
   const [ isCheckbox, setCheckbox ] = React.useState(checkbox);
   const { register, formState: { errors }, handleSubmit, setValue } = useForm();
 

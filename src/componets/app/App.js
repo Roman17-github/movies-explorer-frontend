@@ -88,7 +88,6 @@ function App() {
   };
 
   function submitFormSaved(input, checkbox) {
-
     async function findSaved() {
       return JSON.parse(localStorage.getItem("saveCards")).filter((card) => {
         if (checkbox) {
