@@ -168,7 +168,7 @@ function App() {
       .catch((err) => {
         if (err.status === 401) {
           localStorage.removeItem("login");
-          navigate("/signin");
+          navigate("/");
         }
       })
   }, []);
