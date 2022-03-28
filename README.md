@@ -1,5 +1,4 @@
 # movies-explorer-api
-Проект: Movies Explorer
 Ссылка на проект: https://diplom.roma134.nomoredomains.work
 ***
 # О сайте:
